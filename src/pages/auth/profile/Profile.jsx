@@ -108,7 +108,11 @@ function Profile () {
       })
 
     if (!isMatch(password, cf_password))
-      return setData({ ...data, err: 'Las contraseñas no coinciden', success: '' })
+      return setData({
+        ...data,
+        err: 'Las contraseñas no coinciden',
+        success: ''
+      })
 
     try {
       axios.post(
@@ -149,137 +153,139 @@ function Profile () {
 
   return (
     <>
-         {err && showErrMsg(err)}
-        {success && showSuccessMsg(success)}
-        {loading && <h3>Loading.....</h3>} 
-        <div className="container-all-information">
-       <div className='container-main-profile'>
-        <div className='container-profile'>
-          <h2 className='title-profile'>
-            {isAdmin ? 'PERFIL ADMINISTRADOR' : 'PERFIL USUARIO'}
-          </h2>
+      {err && showErrMsg(err)}
+      {success && showSuccessMsg(success)}
+      {loading && <h3>Loading.....</h3>}
+      <div className='container-all-information'>
+        <div className='container-main-profile'>
+          <div className='container-profile'>
+            <h2 className='title-profile'>
+              {isAdmin ? 'PERFIL ADMINISTRADOR' : 'PERFIL USUARIO'}
+            </h2>
 
-          <div className='container-image'>
-            <img
-              className='profile-image'
-              src={avatar ? avatar : user.avatar}
-              alt=''
-            /> 
-             <input
-                  type='file'
-                  name='file'
-                  id='file_up'
-                  onChange={changeAvatar}
+            <div className='container-image'>
+              <img
+                className='profile-image'
+                src={avatar ? avatar : user.avatar}
+                alt=''
+              />
+              <input
+                type='file'
+                name='file'
+                id='file_up'
+                onChange={changeAvatar}
+              />
+            </div>
+            <div className='container-info-profile'>
+              <div className='form-group'>
+                <Input
+                  label='Nombre'
+                  placeholder='Tu nombre'
+                  name='name'
+                  value={user.name}
+                  onChange={handleChange}
                 />
+              </div>
+              <div className='form-group'>
+                <Input
+                  label='Email'
+                  placeholder='Tu email'
+                  name='email'
+                  value={user.email}
+                  disabled
+                />
+              </div>
+              <div className='form-group'>
+                <Input
+                  type='password'
+                  label='Nueva contraseña'
+                  placeholder='Tu password'
+                  name='password'
+                  value={password}
+                  onChange={handleChange}
+                  disabled
+                />
+              </div>
+              <div className='form-group'>
+                <Input
+                  type='password'
+                  label='Confirmar contraseña'
+                  placeholder='Tu password'
+                  name='cf_password'
+                  value={cf_password}
+                  onChange={handleChange}
+                  disabled
+                />
+              </div>
+            </div>
+            <button
+              className='profile-button-update'
+              disabled={loading}
+              onClick={handleUpdate}
+            >
+              Actualizar
+            </button>
           </div>
-          <div className='container-info-profile'>
-            <div className='form-group'>
-              <Input
-                label='Nombre'
-                placeholder='Tu nombre'
-                name='name'
-                value={user.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className='form-group'>
-              <Input
-                label='Email'
-                placeholder='Tu email'
-                name='email'
-                value={user.email}
-                disabled
-              />
-            </div>
-            <div className='form-group'>
-              <Input
-                label='Nueva contraseña'
-                placeholder='Tu password'
-                name='password'
-                value={password}
-                onChange={handleChange}
-                disabled
-              />
-            </div>
-            <div className='form-group'>
-              <Input
-                label='Confirmar contraseña'
-                placeholder='Tu password'
-                name='cf_password'
-                value={cf_password}
-                onChange={handleChange}
-                disabled
-              />
-            </div>
-          </div>
-          <button
-            className='profile-button-update'
-            disabled={loading}
-            onClick={handleUpdate}
-          >
-            Actualizar
-          </button>
-        </div> 
-      
 
-      {isAdmin ? (
-        
-        <div className='container-main-admin'>
-          <div className='container-info-admin table-responsive'>
-              <h2 className="title-profile-user">USUARIOS</h2>
-            <table className='table-info-students table table-striped table-responsive'>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>NOMBRE</th>
-                  <th>CORREO ELECTRONICO</th>
-                  <th>ADMIN</th>
-                  <th>ACCIONES</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map(user => (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>
-                      {user.role === 1 ? (
-                        <i className='fas fa-check' title='Admin'></i>
-                      ) : (
-                        <i className='fas fa-times' title='User'></i>
-                      )}
-                    </td>
-                    <td>
-                      <Link to={`/edit_user/${user.id}`}>
-                        <i className='fas fa-edit icon-edit' title='Edit'></i>
-                      </Link>
-                      <i
-                        className='fas fa-trash-alt'
-                        title='Remove'
-                        onClick={() => handleDelete(user.id)}
-                      ></i>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <Link to='/create_user'>
-              <button
-                className='profile-button-createUser'
-                disabled={loading}
-                onClick={handleUpdate}
-              >
-                Crear usuario
-              </button>
-            </Link>
-          </div>
+          {isAdmin ? (
+            <div className='container-main-admin'>
+              <div className='container-info-admin table-responsive'>
+                <h2 className='title-profile-user'>USUARIOS</h2>
+                <table className='table-info-students table table-striped table-responsive'>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>NOMBRE</th>
+                      <th>CORREO ELECTRONICO</th>
+                      <th>ADMIN</th>
+                      <th>ACCIONES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map(user => (
+                      <tr key={user.id}>
+                        <td>{user.id}</td>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                        <td>
+                          {user.role === 1 ? (
+                            <i className='fas fa-check' title='Admin'></i>
+                          ) : (
+                            <i className='fas fa-times' title='User'></i>
+                          )}
+                        </td>
+                        <td>
+                          <Link to={`/edit_user/${user.id}`}>
+                            <i
+                              className='fas fa-edit icon-edit'
+                              title='Edit'
+                            ></i>
+                          </Link>
+                          <i
+                            className='fas fa-trash-alt'
+                            title='Remove'
+                            onClick={() => handleDelete(user.id)}
+                          ></i>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <Link to='/create_user'>
+                  <button
+                    className='profile-button-createUser'
+                    disabled={loading}
+                    onClick={handleUpdate}
+                  >
+                    Crear usuario
+                  </button>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
-        
-      ) : (
-        ''
-      )}
-      </div>
       </div>
     </>
   )
