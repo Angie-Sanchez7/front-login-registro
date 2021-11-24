@@ -4,3 +4,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+a {
+  text-decoration: none !important;
+}
+ul {
+  list-style: none !important;
+}
+button {
+  border: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+}

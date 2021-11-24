@@ -192,12 +192,6 @@ function Register () {
                 onChange={handleChangeInput}
               />
             </div>
-            {/* <div className='container-register-input'>
-              <label>Ingresa una imagen</label>
-              <button className='button-submit-photo' type='submit'>
-                Escoger un archivo
-              </button>
-            </div> */}
             {auth.isAdmin ? (
                 <select className='select'>
                   <option value='Administrador' >Administrador</option>
