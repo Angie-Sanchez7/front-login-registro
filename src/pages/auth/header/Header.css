@@ -1,0 +1,80 @@
+/*---------------------HEADER LOGIN----------------------------*/
+.header-login {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+.logo-header-login {
+  width: 15%;
+}
+.header-login a {
+  color: black;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.header-login ul li {
+  top: 13px;
+  display: inline-block;
+  padding: 10px 20px;
+}
+.header-login ul li img {
+  
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.icon-signIn {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #ffd808;
+}
+/*---------------------MENU LOGIN----------------------------*/
+.header-login .link-logOut {
+  color: #fff;
+}
+.header-login .link-profile {
+  color: #fff;
+}
+.container-menu-headerLogin {
+  position: relative;
+  padding: 10px 0;
+}
+.container-menu-headerLogin a {
+  text-transform: capitalize;
+  overflow: hidden;
+}
+.container-menu-headerLogin .container-menu-links {
+  position: absolute;
+  background: rgba(53, 53, 53, 0.664);
+  width: 100%;
+  width: calc(100% + 100px);
+  top: 50px;
+  display: none;
+}
+.container-menu-headerLogin .container-menu-links li {
+  display: block;
+}
+.container-menu-headerLogin:hover .container-menu-links {
+  display: block;
+}
+/*---------------------MEDIA QUERIES----------------------------*/
+@media (max-width: 600px) {
+  .logo-header-login {
+    width: 35%;
+  }
+  .icon-signIn {
+    font-size: 15px;
+  }
+  .header-login ul li img {
+    width: 25px;
+    height: 25px;
+  }
+}
+@media (max-width: 1000px) {
+  .header-login {
+    width: 100%;
+  }
+}
